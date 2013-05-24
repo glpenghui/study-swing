@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  
+  <bean id="itemScrollPane" class="javax.swing.JScrollPane">
+   <constructor-arg>
+      <ref bean="itemTable"/>
+    </constructor-arg>
+  </bean>
+  
+   <!--<bean id="itemTable" class="javax.swing.JTable">
+     <property name="model">
+      <ref bean="itemTableModel"/>
+    </property>  -->
+    <bean id="itemTable" class="com.todo.ui.JTableTmp">
+	<constructor-arg>
+		<list>
+		    <list>
+			     <value>一</value>
+		        <value>男</value>
+		        <value>1</value>
+		    </list>
+		    <list>
+			   <value>二</value>
+		        <value>男</value>
+		        <value>2</value>
+		    </list>
+		    <list>
+			    <value>三</value>
+		        <value>女</value>
+		        <value>3</value>
+		    </list>
+	   </list>
+	</constructor-arg> 
+	<constructor-arg>
+    	<list>
+	        <value>姓名</value>
+	        <value>性别</value>
+	        <value>年龄</value>
+       </list>
+    </constructor-arg> 
+  </bean>
+  
+  
+  
+  
+  <bean id="itemTableModel" class="com.todo.ui.ItemTableModel">
+    <property name="itemList">
+      <ref bean="itemList"/>
+    </property>
+  </bean>
+  <bean id="itemList" class="java.util.ArrayList">
+    <constructor-arg>
+      <list>
+        <value>Item 1</value>
+        <value>Item 2</value>
+        <value>Item 3</value>
+      </list>
+    </constructor-arg>
+  </bean>
+  
+</beans> 
+

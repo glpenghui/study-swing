@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="mainFrame" class="com.todo.ui.MainFrame" init-method="init">
+  	 <property name="contentPane">
+      	<ref bean="mainPanel"/>
+     </property>
+  	 <property name="title">
+     	 <value>订单复核</value>
+     </property>
+  </bean>
+  
+   <bean id="mainPanel" class="com.todo.ui.BoxLayoutPanel" init-method="init">
+    <property name="axis">
+      <!--  1 对应于 BoxLayout 的 Y_AXIS 常量。 -->
+      <!--  Spring can access constants, but it's more complex -->
+      <value>1</value>
+    </property>
+    <property name="panelComponents">
+      <list>
+        <ref bean="itemScrollPane"/>
+         <ref bean="buttonPanel"/>
+      </list>
+    </property>
+  </bean>
+  
+</beans> 
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:db.properties</value>
+		</property>
+	</bean>
+
+	<!--测试数据源配置-->
+	<bean id="baby_db" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg>
+			<ref bean="ds_baby" />
+		</constructor-arg>
+	</bean>		
+	<!--测试数据源-->			  	
+	<bean id="ds_baby" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${baby.jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${baby.jdbc.url}" />
+		<property name="user" value="${baby.jdbc.username}" />
+		<property name="password" value="${baby.jdbc.password}" />
+		<property name="maxPoolSize" value="${baby.jdbc.maxPoolSize}" />
+
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}" />
+		<property name="checkoutTimeout" value="${c3p0.checkoutTimeout}" />
+		<property name="initialPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
+		<property name="maxIdleTimeExcessConnections" value="${c3p0.maxIdleTimeExcessConnections}" />
+		<property name="maxStatements" value="0" />
+		<property name="maxStatementsPerConnection" value="0" />
+	</bean>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref local="ds_baby" />
+		</property>
+	</bean>
+	
+<!--测试数据源		  	
+	<bean id="ds_hope" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${mz.jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${mz.jdbc.url}" />
+		<property name="user" value="${mz.jdbc.username}" />
+		<property name="password" value="${mz.jdbc.password}" />
+
+
+
+ 		<property name="maxPoolSize"        value="20" />
+        <property name="minPoolSize"        value="5" />
+        <property name="maxStatements"      value="200" />
+        <property name="initialPoolSize"    value="5" />
+        <property name="maxIdleTime"        value="15"/>
+        <property name="idleConnectionTestPeriod"   value="5" />
+        <property name="testConnectionOnCheckin"    value="false" />
+        <property name="testConnectionOnCheckout"   value="false" />
+        <property name="preferredTestQuery"         value="SELECT 1 FROM DUAL" />
+	</bean>-->	
+	
+</beans>
