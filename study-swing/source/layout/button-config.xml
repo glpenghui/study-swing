@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+  <bean id="buttonPanel" class="com.todo.ui.BoxLayoutPanel" init-method="init">
+    <property name="axis">
+      <!--  "0" 对应于 BoxLayout 的 X_AXIS 常量。 -->
+      <value>0</value>
+    </property>
+    <property name="panelComponents">
+      <list>
+      	<ref bean="deleteButton"/>
+        <ref bean="addNewButton"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="deleteButton" class="com.todo.ui.button.ActionListenerButton" 
+        init-method="init">
+    <property name="actionListener">
+      <ref bean="deleteButtonActionListener"/>
+    </property>
+    <property name="text">
+      <value>Delete</value>
+    </property>
+  </bean>
+  <bean id="deleteButtonActionListener" class="com.todo.ui.button.DeleteButtonActionListener">
+    <property name="list">
+      <ref bean="itemList"/>
+    </property>
+    <property name="table">
+      <ref bean="itemTable"/>
+    </property>
+  </bean>
+  <bean id="addNewButton" class="com.todo.ui.button.ActionListenerButton" 
+        init-method="init">
+    <property name="actionListener">
+      <ref bean="addNewButtonActionListener"/>
+    </property>
+    <property name="text">
+      <value>Add New</value>
+    </property>
+  </bean>
+  <bean id="addNewButtonActionListener" class="com.todo.ui.button.AddNewButtonActionListener">
+    <property name="list">
+      <ref bean="itemList"/>
+    </property>
+    <property name="table">
+      <ref bean="itemTable"/>
+    </property>
+  </bean>
+  
+  
+</beans> 
+
